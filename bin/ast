@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+require_relative "../lib/rdg/tree/ast"
+
+if ARGV.size == 1
+  RDG::Tree::AST.from_path(ARGV[0]).write_to_graphic_file('png', ARGV[0])
+else
+  puts "ast: expected 1 argument but received #{ARGV.size}"
+  puts "Usage:"
+  puts "  ast path/to/source.rb"
+end
