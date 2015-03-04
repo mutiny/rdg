@@ -4,6 +4,8 @@ AllCops:
     - Rakefile
   Exclude:
     - vendor/*
+    - sample.rb
+    - target.rb
 
 StringLiterals:
   Enabled: false

@@ -20,6 +20,10 @@ module RDG
         import(ast)
       end
 
+      def root
+        @graph.each_vertex.first
+      end
+
       def pre_order_iterator
         RGL::PreOrderIterator.new(@graph)
       end
@@ -35,30 +39,59 @@ module RDG
       private
 
       def import(ast)
-        Node.new(ast).tap do |current_node|
+        Node.new(ast, @graph).tap do |current_node|
           @graph.add_vertex(current_node)
 
-          current_node.children.each do |child|
-            @graph.add_edge(current_node, import(child))
+          if ast.respond_to?(:children)
+            ast.children.each do |child|
+              @graph.add_edge(current_node, import(child))
+            end
           end
         end
       end
 
       class Node
-        def initialize(wrapped)
+        attr_accessor :wrapped
+
+        def initialize(wrapped, graph)
           @wrapped = wrapped
+          @graph = graph
+        end
+
+        def compound?
+          wrapped.is_a?(Parser::AST::Node)
+        end
+
+        def scalar?
+          !compound?
+        end
+
+        def empty?
+          wrapped.nil?
+        end
+
+        def type
+          compound? ? wrapped.type : nil
         end
 
         def children
-          if @wrapped.is_a?(Parser::AST::Node)
-            @wrapped.children
+          @graph.each_adjacent(self).to_a
+        end
+
+        def ==(other)
+          if scalar?
+            wrapped == other.wrapped
           else
-            []
+            type == other.type && children == other.children
           end
         end
 
+        def inspect
+          to_s
+        end
+
         def to_s
-          @wrapped.to_s
+          wrapped.to_s
         end
       end
     end

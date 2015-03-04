@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+require_relative "../lib/rdg/cfg"
+
+if ARGV.size == 1
+  RDG::CFG.from_path(ARGV[0]).write_to_graphic_file('png', ARGV[0] + ".cfg")
+else
+  puts "cfg: expected 1 argument but received #{ARGV.size}"
+  puts "Usage:"
+  puts "  cfg path/to/source.rb"
+end
