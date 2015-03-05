@@ -1,6 +1,18 @@
+require_relative "none"
+
 module RDG
   module Control
     class Analyser
+      ANALYSERS = Hash.new(None)
+
+      def self.for(ast_node, graph, state)
+        ANALYSERS[ast_node.type].new(ast_node, graph, state)
+      end
+
+      def self.register_analyser(*types)
+        types.each { |type| ANALYSERS[type] = self }
+      end
+
       def initialize(ast_node, graph, state)
         @ast_node, @graph, @state = ast_node, graph, state
       end

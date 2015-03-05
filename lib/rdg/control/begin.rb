@@ -3,6 +3,8 @@ require_relative "analyser"
 module RDG
   module Control
     class Begin < Analyser
+      register_analyser :begin, :kwbegin
+
       def internal_flow_edges
         children.each_cons(2).to_a
       end

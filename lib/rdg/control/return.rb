@@ -1,6 +1,8 @@
 module RDG
   module Control
-    class Return
+    class Return < Analyser
+      register_analyser :return
+
       def initialize(ast_node, graph, state)
         @graph, @ast_node, @state = graph, ast_node, state
       end

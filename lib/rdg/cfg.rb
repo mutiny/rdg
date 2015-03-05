@@ -1,4 +1,5 @@
 require_relative "tree/ast"
+require_relative "control/analyser"
 require_relative "control/def"
 require_relative "control/begin"
 require_relative "control/if"
@@ -42,24 +43,7 @@ module RDG
     def analyse(ast)
       state = {}
       ast.pre_order_iterator.select(&:compound?).each do |ast_node|
-        analyser_for(ast_node.type).new(ast_node, @graph, state).analyse
-      end
-    end
-
-    def analyser_for(ast_node_type)
-      case ast_node_type
-      when :def
-        Control::Def
-      when :begin, :kwbegin
-        Control::Begin
-      when :if
-        Control::If
-      when :while
-        Control::While
-      when :return
-        Control::Return
-      else
-        Control::None
+        Control::Analyser.for(ast_node, @graph, state).analyse
       end
     end
 

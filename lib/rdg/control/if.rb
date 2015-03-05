@@ -3,6 +3,8 @@ require_relative "analyser"
 module RDG
   module Control
     class If < Analyser
+      register_analyser :if
+
       def initialize(ast_node, graph, state)
         super(ast_node, graph, state)
         @predicate, *@consequences = children.reject(&:empty?)

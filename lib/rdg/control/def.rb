@@ -1,6 +1,8 @@
 module RDG
   module Control
-    class Def
+    class Def < Analyser
+      register_analyser :def
+
       def initialize(ast_node, graph, state)
         @graph, @state = graph, state
         @name, @args, @body = ast_node.children

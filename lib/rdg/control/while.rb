@@ -3,6 +3,8 @@ require_relative "analyser"
 module RDG
   module Control
     class While < Analyser
+      register_analyser :while
+
       def initialize(ast_node, graph, state)
         super(ast_node, graph, state)
         @predicate, @body = children
