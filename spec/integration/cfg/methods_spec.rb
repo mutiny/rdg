@@ -8,7 +8,7 @@ module RDG
         name, first, _ = cfg.vertices
 
         expect(cfg.vertices.size).to eq(3)
-        expect(cfg.has_edge?(name, first)).to be_truthy
+        expect(cfg.edge?(name, first)).to be_truthy
       end
     end
 
@@ -19,11 +19,11 @@ module RDG
       end
 
       it "should show control flowing from the method name to the body" do
-        expect(@cfg.has_edge?(@name, @first)).to be_truthy
+        expect(@cfg.edge?(@name, @first)).to be_truthy
       end
 
       it "should not show control flowing from return to successor" do
-        expect(@cfg.has_edge?(@ret, @second)).to be_falsey
+        expect(@cfg.edge?(@ret, @second)).to be_falsey
       end
     end
 

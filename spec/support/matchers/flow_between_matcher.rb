@@ -1,6 +1,6 @@
 RSpec::Matchers.define :flow_between do |source_of_start, source_of_end|
   match do |graph|
-    graph.has_edge?(
+    graph.edge?(
       find_vertex(graph, source_of_start),
       find_vertex(graph, source_of_end)
     )

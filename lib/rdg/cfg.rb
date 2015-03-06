@@ -34,7 +34,7 @@ module RDG
       @graph.each_adjacent(v).to_a
     end
 
-    def has_edge?(u, v)
+    def edge?(u, v)
       @graph.has_edge?(u, v)
     end
 
