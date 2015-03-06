@@ -5,6 +5,7 @@ require_relative "control/begin"
 require_relative "control/if"
 require_relative "control/while"
 require_relative "control/return"
+require_relative "control/lvasgn"
 require_relative "control/none"
 
 module RDG
