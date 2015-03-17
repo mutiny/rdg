@@ -23,6 +23,26 @@ module RDG
         end
       end
 
+      context "without any consequence (i.e., the `parser` gem's representation of unless)" do
+        subject do
+          ast = double("ast")
+          allow(ast).to receive(:children) { [:predicate, :"", :alternative] }
+          If.new(ast, nil, nil)
+        end
+
+        it "should have control flow start at the predicate" do
+          expect(subject.start_nodes).to eq([:predicate])
+        end
+
+        it "should have control flow end at the predicate and the alternative" do
+          expect(subject.end_nodes).to eq([:predicate, :alternative])
+        end
+
+        it "should have control flow edge between predicate and alternative" do
+          expect(subject.internal_flow_edges).to eq([[:predicate, :alternative]])
+        end
+      end
+
       context "with one alternative" do
         subject do
           ast = double("ast")
