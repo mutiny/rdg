@@ -15,3 +15,6 @@ LineLength:
 
 Documentation:
   Enabled: false
+
+Style/TrivialAccessors:
+  ExactNameMatch: true
