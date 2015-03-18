@@ -26,14 +26,5 @@ module RDG
         expect(@cfg.edge?(@ret, @second)).to be_falsey
       end
     end
-
-    context "return from no method" do
-      it "should do nothing" do
-        cfg = CFG.from_source("return")
-
-        puts cfg.vertices
-        expect(cfg.vertices.empty?).to be_truthy
-      end
-    end
   end
 end

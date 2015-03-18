@@ -7,7 +7,6 @@ require_relative "control/when"
 require_relative "control/if"
 require_relative "control/while"
 require_relative "control/return"
-require_relative "control/lvasgn"
 require_relative "control/none"
 
 module RDG
@@ -22,6 +21,7 @@ module RDG
 
     def initialize(ast)
       @graph = BiDiDirectedAdjacencyGraph.new
+      @graph.add_vertex(ast.root)
       analyse(ast)
     end
 

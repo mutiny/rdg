@@ -3,7 +3,13 @@ require "rdg/cfg"
 module RDG
   describe CFG do
     context "for a sequence of statements" do
-      it "should show no control flow for a lone element" do
+      it "should show no control flow for a lone integer" do
+        cfg = CFG.from_source("1")
+
+        expect(cfg).to contain("1")
+      end
+
+      it "should show no control flow for a lone assignment" do
         cfg = CFG.from_source("a = 1")
 
         expect(cfg).to contain("a = 1")

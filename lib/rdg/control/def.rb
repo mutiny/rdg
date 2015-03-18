@@ -10,6 +10,7 @@ module RDG
 
       def analyse
         @graph.add_edge(@name, @body)
+        remove_non_flow_vertices
       end
     end
   end
