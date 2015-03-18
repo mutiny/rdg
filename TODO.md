@@ -50,9 +50,16 @@ Not too sure how to approach this yet.
 
 It might be reasonable to assume that any method that takes a block could cause control to flow into that block. If we have the source for that method, we could also check for yield or a call before adding this control flow edge.
 
+No matter what, blocks support the same skipping constructs as loops:
+
+- [ ] `break`
+- [ ] `next`
+- [ ] `redo`
+
 
 ## Inter-method Control Flow Graphs
 
 - [ ] `return` expressions
 - [ ] direct method invocations
 - [ ] method invocations via `send` ?
+- [ ] ensure control flow edges from a method invocation to a block only added when callee yields to block
