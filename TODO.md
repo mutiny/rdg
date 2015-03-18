@@ -12,7 +12,7 @@
 - [x] `elsif`
 - [x] ternary `a ? b : c`
 - [x] expression modifier `if`
-  
+
 #### `unless` expressions
 - [x] no else
 - [x] else
@@ -22,14 +22,14 @@
 - [x] single when
 - [x] else
 - [x] several when
-  
+
 ### Loops
 
 #### Looping expressions
-- [ ] `while`
-- [ ] `until`
-- [ ] `for`
-- [ ] `while` and `until` as modifiers
+- [x] `while`
+- [x] `until`
+- [x] `for`
+- [x] `while` and `until` as modifiers
 
 #### Skipping
 - [ ] `break`
@@ -49,7 +49,7 @@
 Not too sure how to approach this yet.
 
 It might be reasonable to assume that any method that takes a block could cause control to flow into that block. If we have the source for that method, we could also check for yield or a call before adding this control flow edge.
-  
+
 
 ## Inter-method Control Flow Graphs
 
