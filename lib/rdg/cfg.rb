@@ -1,3 +1,4 @@
+require_relative "rgl/bidirected_adjacency_graph"
 require_relative "tree/ast"
 require_relative "control/analyser"
 require_relative "control/def"
@@ -21,7 +22,7 @@ module RDG
     end
 
     def initialize(ast)
-      @graph = BiDiDirectedAdjacencyGraph.new
+      @graph = RDG::RGL::BidirectedAdjacencyGraph.new
       @graph.add_vertex(ast.root)
       analyse(ast)
     end
@@ -47,16 +48,6 @@ module RDG
     def analyse(ast)
       ast.pre_order_iterator.select(&:compound?).each do |ast_node|
         Control::Analyser.for(ast_node, @graph).analyse
-      end
-    end
-
-    class BiDiDirectedAdjacencyGraph < ::RGL::DirectedAdjacencyGraph
-      def each_predecessor(vertex, &block)
-        each_vertex.select { |v| each_adjacent(v).include?(vertex) }.each(&block)
-      end
-
-      def each_successor(vertex, &block)
-        each_adjacent(vertex, &block) if has_vertex?(vertex)
       end
     end
   end

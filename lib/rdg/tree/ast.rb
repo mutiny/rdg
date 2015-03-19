@@ -1,6 +1,5 @@
-require "rgl/adjacency"
-require "rgl/dot"
 require "parser/current"
+require_relative "../rgl/bidirected_adjacency_graph"
 require_relative "rgl/pre_order_iterator"
 require_relative "rgl/post_order_iterator"
 
@@ -16,7 +15,7 @@ module RDG
       end
 
       def initialize(ast)
-        @graph = ::RGL::DirectedAdjacencyGraph.new
+        @graph = RDG::RGL::BidirectedAdjacencyGraph.new
         import(ast)
       end
 
@@ -75,7 +74,19 @@ module RDG
         end
 
         def children
-          @graph.each_adjacent(self).to_a
+          @graph.each_successor(self).to_a
+        end
+
+        def parent
+          @graph.each_predecessor(self).first
+        end
+
+        def ancestors
+          parent.nil? ? [] : parent.ancestors.unshift(parent)
+        end
+
+        def siblings
+          parent.nil? ? [] : parent.children
         end
 
         def ==(other)
