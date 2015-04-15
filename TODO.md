@@ -32,9 +32,9 @@
 - [x] `while` and `until` as modifiers
 
 #### Skipping
-- [ ] `break`
-- [ ] `next`
-- [ ] `redo`
+- [x] `break`
+- [x] `next`
+- [x] `redo`
 
 ### Exceptions
 - [ ] `begin` / `rescue`
@@ -55,7 +55,6 @@ No matter what, blocks support the same skipping constructs as loops:
 - [ ] `break`
 - [ ] `next`
 - [ ] `redo`
-
 
 ## Inter-method Control Flow Graphs
 
