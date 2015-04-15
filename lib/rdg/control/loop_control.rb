@@ -6,6 +6,8 @@ module RDG
       register_analyser :break, :next, :redo
 
       def analyse
+        return unless loop
+
         if (@ast_node.type == :break)
           successors.each { |s| @graph.add_edge(@ast_node, s) }
         else

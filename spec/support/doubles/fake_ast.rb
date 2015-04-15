@@ -1,7 +1,7 @@
 class FakeAst
-  attr_reader :type, :children, :ancestors
+  attr_accessor :type, :children, :ancestors, :siblings
 
-  def initialize(type, children: [], ancestors: [])
-    @type, @children, @ancestors = type, children, ancestors
+  def initialize(type, children: [], ancestors: [], siblings: [])
+    @type, @children, @ancestors, @siblings = type, children, ancestors, siblings
   end
 end
