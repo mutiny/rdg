@@ -44,9 +44,8 @@ module RDG
     private
 
     def analyse(ast)
-      state = {}
       ast.pre_order_iterator.select(&:compound?).each do |ast_node|
-        Control::Analyser.for(ast_node, @graph, state).analyse
+        Control::Analyser.for(ast_node, @graph).analyse
       end
     end
 

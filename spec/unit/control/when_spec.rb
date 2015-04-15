@@ -11,7 +11,7 @@ module RDG
           @graph = spy("graph")
           allow(@graph).to receive(:each_successor).with(ast) { [:next_when, :successor] }
 
-          When.new(ast, @graph, nil)
+          When.new(ast, @graph)
         end
 
         it "should have control flow start at the expression" do
@@ -41,7 +41,7 @@ module RDG
           @graph = spy("graph")
           allow(@graph).to receive(:each_successor).with(ast) { [:successor] }
 
-          When.new(ast, @graph, nil)
+          When.new(ast, @graph)
         end
 
         it "should have control flow start at the expression" do

@@ -5,8 +5,8 @@ module RDG
     class Case < Analyser
       register_analyser :case
 
-      def initialize(ast_node, graph, state)
-        super(ast_node, graph, state)
+      def initialize(ast_node, graph)
+        super(ast_node, graph)
         @expression, *@consequences = children.reject(&:empty?)
       end
 

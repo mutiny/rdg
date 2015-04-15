@@ -7,7 +7,7 @@ module RDG
         subject do
           ast = double("ast")
           allow(ast).to receive(:children) { [:predicate, :consequence, :""] }
-          If.new(ast, nil, nil)
+          If.new(ast, nil)
         end
 
         it "should have control flow start at the predicate" do
@@ -27,7 +27,7 @@ module RDG
         subject do
           ast = double("ast")
           allow(ast).to receive(:children) { [:predicate, :"", :alternative] }
-          If.new(ast, nil, nil)
+          If.new(ast, nil)
         end
 
         it "should have control flow start at the predicate" do
@@ -47,7 +47,7 @@ module RDG
         subject do
           ast = double("ast")
           allow(ast).to receive(:children) { [:predicate, :consequence, :alternative] }
-          If.new(ast, nil, nil)
+          If.new(ast, nil)
         end
 
         it "should have control flow start at the predicate" do
@@ -70,7 +70,7 @@ module RDG
         subject do
           ast = double("ast")
           allow(ast).to receive(:children) { [:predicate, :consequence, :a1, :a2, :a3] }
-          If.new(ast, nil, nil)
+          If.new(ast, nil)
         end
 
         it "should have control flow start at the predicate" do

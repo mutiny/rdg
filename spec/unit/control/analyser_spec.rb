@@ -21,7 +21,7 @@ module RDG
           end
         end
 
-        DummyAnalyser.new(ast, graph, nil)
+        DummyAnalyser.new(ast, graph)
       end
 
       it "should add a CFG edge for every internal flow edge" do

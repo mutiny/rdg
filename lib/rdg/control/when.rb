@@ -5,8 +5,8 @@ module RDG
     class When < Analyser
       register_analyser :when
 
-      def initialize(ast_node, graph, state)
-        super(ast_node, graph, state)
+      def initialize(ast_node, graph)
+        super(ast_node, graph)
         @test, @action = children
       end
 

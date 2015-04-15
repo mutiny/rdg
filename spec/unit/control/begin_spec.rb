@@ -6,7 +6,7 @@ module RDG
       subject do
         ast = double("ast")
         allow(ast).to receive(:children) { [1, 2, 3] }
-        Begin.new(ast, nil, nil)
+        Begin.new(ast, nil)
       end
 
       it "should have control flow start at the first child" do

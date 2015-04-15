@@ -6,7 +6,7 @@ module RDG
       subject do
         ast = double("ast")
         allow(ast).to receive(:children) { [:predicate, :body] }
-        While.new(ast, nil, nil)
+        While.new(ast, nil)
       end
 
       it "should have control flow start at the predicate" do

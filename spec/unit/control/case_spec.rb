@@ -7,7 +7,7 @@ module RDG
         subject do
           ast = double("ast")
           allow(ast).to receive(:children) { [:expression, :when, :""] }
-          Case.new(ast, nil, nil)
+          Case.new(ast, nil)
         end
 
         it "should have control flow start at the expression" do
@@ -27,7 +27,7 @@ module RDG
         subject do
           ast = double("ast")
           allow(ast).to receive(:children) { [:expression, :when, :alternative] }
-          Case.new(ast, nil, nil)
+          Case.new(ast, nil)
         end
 
         it "should have control flow start at the expression" do
@@ -50,7 +50,7 @@ module RDG
         subject do
           ast = double("ast")
           allow(ast).to receive(:children) { [:expression, :when1, :when2, :when3, :alternative] }
-          Case.new(ast, nil, nil)
+          Case.new(ast, nil)
         end
 
         it "should have control flow start at the expression" do

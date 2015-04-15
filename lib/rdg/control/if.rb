@@ -5,8 +5,8 @@ module RDG
     class If < Analyser
       register_analyser :if
 
-      def initialize(ast_node, graph, state)
-        super(ast_node, graph, state)
+      def initialize(ast_node, graph)
+        super(ast_node, graph)
         @predicate, *@consequences = children.reject(&:empty?)
       end
 
