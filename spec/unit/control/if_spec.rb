@@ -4,11 +4,8 @@ module RDG
   module Control
     describe If do
       context "without any alternatives" do
-        subject do
-          ast = double("ast")
-          allow(ast).to receive(:children) { [:predicate, :consequence, :""] }
-          If.new(ast, nil)
-        end
+        let(:ast) { FakeAst.new(:if, children: [:predicate, :consequence, :""]) }
+        subject { If.new(ast, nil) }
 
         it "should have control flow start at the predicate" do
           expect(subject.start_nodes).to eq([:predicate])
@@ -24,11 +21,8 @@ module RDG
       end
 
       context "without any consequence (i.e., the `parser` gem's representation of unless)" do
-        subject do
-          ast = double("ast")
-          allow(ast).to receive(:children) { [:predicate, :"", :alternative] }
-          If.new(ast, nil)
-        end
+        let(:ast) { FakeAst.new(:if, children: [:predicate, :"", :alternative]) }
+        subject { If.new(ast, nil) }
 
         it "should have control flow start at the predicate" do
           expect(subject.start_nodes).to eq([:predicate])
@@ -44,11 +38,8 @@ module RDG
       end
 
       context "with one alternative" do
-        subject do
-          ast = double("ast")
-          allow(ast).to receive(:children) { [:predicate, :consequence, :alternative] }
-          If.new(ast, nil)
-        end
+        let(:ast) { FakeAst.new(:if, children: [:predicate, :consequence, :alternative]) }
+        subject { If.new(ast, nil) }
 
         it "should have control flow start at the predicate" do
           expect(subject.start_nodes).to eq([:predicate])
@@ -67,11 +58,8 @@ module RDG
       end
 
       context "with several alternatives" do
-        subject do
-          ast = double("ast")
-          allow(ast).to receive(:children) { [:predicate, :consequence, :a1, :a2, :a3] }
-          If.new(ast, nil)
-        end
+        let(:ast) { FakeAst.new(:if, children: [:predicate, :consequence, :a1, :a2, :a3]) }
+        subject { If.new(ast, nil) }
 
         it "should have control flow start at the predicate" do
           expect(subject.start_nodes).to eq([:predicate])

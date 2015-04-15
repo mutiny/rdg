@@ -4,11 +4,8 @@ module RDG
   module Control
     describe Def do
       let(:graph) { spy("graph") }
-      subject do
-        ast = double("ast")
-        allow(ast).to receive(:children) { [:name, :args, :body] }
-        Def.new(ast, graph)
-      end
+      let(:ast) { FakeAst.new(:def, children: [:name, :args, :body]) }
+      subject { Def.new(ast, graph) }
 
       it "should have control flow from name to body" do
         subject.analyse

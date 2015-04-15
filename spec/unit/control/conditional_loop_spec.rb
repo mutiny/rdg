@@ -3,11 +3,8 @@ require "rdg/control/conditional_loop"
 module RDG
   module Control
     describe ConditionalLoop do
-      subject do
-        ast = double("ast")
-        allow(ast).to receive(:children) { [:predicate, :body] }
-        ConditionalLoop.new(ast, nil)
-      end
+      let(:ast) { FakeAst.new(:while, children: [:predicate, :body]) }
+      subject { ConditionalLoop.new(ast, nil) }
 
       it "should have control flow start at the predicate" do
         expect(subject.start_nodes).to eq([:predicate])

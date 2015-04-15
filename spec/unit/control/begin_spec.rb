@@ -3,11 +3,8 @@ require "rdg/control/begin"
 module RDG
   module Control
     describe Begin do
-      subject do
-        ast = double("ast")
-        allow(ast).to receive(:children) { [1, 2, 3] }
-        Begin.new(ast, nil)
-      end
+      let(:ast) { FakeAst.new(:begin, children: [1, 2, 3]) }
+      subject { Begin.new(ast, nil) }
 
       it "should have control flow start at the first child" do
         expect(subject.start_nodes).to eq([1])

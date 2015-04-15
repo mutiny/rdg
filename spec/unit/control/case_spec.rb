@@ -4,11 +4,8 @@ module RDG
   module Control
     describe Case do
       context "sole (when) part" do
-        subject do
-          ast = double("ast")
-          allow(ast).to receive(:children) { [:expression, :when, :""] }
-          Case.new(ast, nil)
-        end
+        let(:ast) { FakeAst.new(:case, children: [:expression, :when, :""]) }
+        subject { Case.new(ast, nil) }
 
         it "should have control flow start at the expression" do
           expect(subject.start_nodes).to eq([:expression])
@@ -24,41 +21,35 @@ module RDG
       end
 
       context "with else part" do
-        subject do
-          ast = double("ast")
-          allow(ast).to receive(:children) { [:expression, :when, :alternative] }
-          Case.new(ast, nil)
-        end
+        let(:ast) { FakeAst.new(:case, children: [:expression, :when, :alt]) }
+        subject { Case.new(ast, nil) }
 
         it "should have control flow start at the expression" do
           expect(subject.start_nodes).to eq([:expression])
         end
 
         it "should have control flow end at the when and alternative" do
-          expect(subject.end_nodes).to eq([:when, :alternative])
+          expect(subject.end_nodes).to eq([:when, :alt])
         end
 
         it "should have control flow edge from expression to when and then to alternative" do
           expect(subject.internal_flow_edges).to eq([
             [:expression, :when],
-            [:when, :alternative]
+            [:when, :alt]
           ])
         end
       end
 
       context "with several alternatives" do
-        subject do
-          ast = double("ast")
-          allow(ast).to receive(:children) { [:expression, :when1, :when2, :when3, :alternative] }
-          Case.new(ast, nil)
-        end
+        let(:ast) { FakeAst.new(:case, children: [:expression, :when1, :when2, :when3, :alt]) }
+        subject { Case.new(ast, nil) }
 
         it "should have control flow start at the expression" do
           expect(subject.start_nodes).to eq([:expression])
         end
 
         it "should have control flow end at the whens and alternative" do
-          expect(subject.end_nodes).to eq([:when1, :when2, :when3, :alternative])
+          expect(subject.end_nodes).to eq([:when1, :when2, :when3, :alt])
         end
 
         it "should have control flow edge from expression through whens to alternative" do
@@ -66,7 +57,7 @@ module RDG
             [:expression, :when1],
             [:when1, :when2],
             [:when2, :when3],
-            [:when3, :alternative]
+            [:when3, :alt]
           ])
         end
       end
