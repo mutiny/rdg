@@ -1,20 +1,21 @@
 require_relative "none"
+require_relative "equivalences"
 
 module RDG
   module Control
     class Analyser
       ANALYSERS = Hash.new(None)
 
-      def self.for(ast_node, graph)
-        ANALYSERS[ast_node.type].new(ast_node, graph)
-      end
-
       def self.register_analyser(*types)
         types.each { |type| ANALYSERS[type] = self }
       end
 
-      def initialize(ast_node, graph)
-        @ast_node, @graph = ast_node, graph
+      def self.for(ast_node, graph, equivalences)
+        ANALYSERS[ast_node.type].new(ast_node, graph, equivalences)
+      end
+
+      def initialize(ast_node, graph, equivalences = Equivalences.new)
+        @ast_node, @graph, @equivalences = ast_node, graph, equivalences
       end
 
       def analyse
@@ -22,6 +23,7 @@ module RDG
         propogate_incoming_flow
         propogate_outgoing_flow
         remove_non_flow_vertices
+        add_equivalences
       end
 
       private
@@ -50,6 +52,10 @@ module RDG
 
       def remove_non_flow_vertices
         @graph.remove_vertex(@ast_node)
+      end
+
+      def add_equivalences
+        @equivalences.add(@ast_node, start_nodes)
       end
     end
   end

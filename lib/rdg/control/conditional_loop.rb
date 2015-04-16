@@ -5,8 +5,8 @@ module RDG
     class ConditionalLoop < Analyser
       register_analyser :while, :until
 
-      def initialize(ast_node, graph)
-        super(ast_node, graph)
+      def initialize(ast_node, graph, equivalences = Equivalences.new)
+        super(ast_node, graph, equivalences)
         @predicate, @body = children
       end
 

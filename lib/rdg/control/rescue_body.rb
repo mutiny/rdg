@@ -5,8 +5,8 @@ module RDG
     class RescueBody < Analyser
       register_analyser :resbody
 
-      def initialize(ast_node, graph)
-        super(ast_node, graph)
+      def initialize(ast_node, graph, equivalences = Equivalences.new)
+        super(ast_node, graph, equivalences)
         _exception_types, _variable_name, *@statements = children
       end
 

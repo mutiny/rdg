@@ -17,6 +17,7 @@ module RDG
     def initialize(ast)
       @graph = RDG::RGL::BidirectedAdjacencyGraph.new
       @graph.add_vertex(ast.root)
+      @equivalences = Control::Equivalences.new
       analyse(ast)
     end
 
@@ -40,7 +41,7 @@ module RDG
 
     def analyse(ast)
       ast.pre_order_iterator.select(&:compound?).each do |ast_node|
-        Control::Analyser.for(ast_node, @graph).analyse
+        Control::Analyser.for(ast_node, @graph, @equivalences).analyse
       end
     end
   end

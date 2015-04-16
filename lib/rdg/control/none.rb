@@ -1,7 +1,7 @@
 module RDG
   module Control
     class None
-      def initialize(_ast_node, _graph)
+      def initialize(*_)
       end
 
       def analyse
