@@ -37,12 +37,14 @@
 - [x] `redo`
 
 ### Exceptions
-- [ ] `begin` / `rescue`
+- [x] `begin` / `rescue`
 - [ ] def / `rescue`
 - [ ] multiple `rescues`
 - [ ] `retry`
 - [ ] `ensure` part
 - [ ] `else` part
+
+Exception control flow might be neater if there was some notion of hierarchy in the CFG. Right now, every statement within the rescuable block has a control flow edge to each of the exception handlers. It would be neater to have a single control flow edge from some kind of "parent" node which contains each of the statements in the rescuable block.
 
 ### Blocks
 
