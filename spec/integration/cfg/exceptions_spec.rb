@@ -38,6 +38,20 @@ module RDG
           expect(cfg).to flow_between("x = 1", "z = 1")
           expect(cfg).to flow_between("y = 1", "z = 1")
         end
+
+        it "retrying should return control to the start of the block" do
+          cfg = CFG.from_source(
+            "#{block_type}; a = 1; rescue; retry; end; z = 1"
+          )
+
+          expect(cfg).to contain("a = 1", "retry", "z = 1")
+
+          expect(cfg).to flow_between("a = 1", "z = 1")
+          expect(cfg).to flow_between("a = 1", "retry")
+          expect(cfg).to flow_between("retry", "a = 1")
+
+          expect(cfg).not_to flow_between("retry", "z = 1")
+        end
       end
     end
   end
