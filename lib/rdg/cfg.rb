@@ -1,18 +1,8 @@
+require "require_all"
+
 require_relative "rgl/bidirected_adjacency_graph"
 require_relative "tree/ast"
-require_relative "control/analyser"
-require_relative "control/def"
-require_relative "control/begin"
-require_relative "control/case"
-require_relative "control/when"
-require_relative "control/if"
-require_relative "control/conditional_loop"
-require_relative "control/for"
-require_relative "control/loop_control"
-require_relative "control/rescue"
-require_relative "control/rescue_body"
-require_relative "control/return"
-require_relative "control/none"
+require_rel "control/*"
 
 module RDG
   class CFG
