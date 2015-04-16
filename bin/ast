@@ -1,10 +1,11 @@
 #!/usr/bin/env ruby
 require_relative "../lib/rdg/tree/ast"
 
-if ARGV.size == 1
-  RDG::Tree::AST.from_path(ARGV[0]).write_to_graphic_file('png', ARGV[0] + ".ast")
+if ARGV.size == 1 || ARGV.size == 2
+  image_format = ARGV.size == 2 ? ARGV[1] : 'pdf'
+  RDG::Tree::AST.from_path(ARGV[0]).write_to_graphic_file(image_format, ARGV[0] + ".ast")
 else
-  puts "ast: expected 1 argument but received #{ARGV.size}"
+  puts "ast: expected 1 or 2 arguments but received #{ARGV.size}"
   puts "Usage:"
-  puts "  ast path/to/source.rb"
+  puts "  ast path/to/source.rb [image_format]"
 end
