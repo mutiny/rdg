@@ -8,6 +8,8 @@ module RDG
       def analyse
         return unless loop
 
+        remove_all_successors
+
         if (@ast_node.type == :break)
           successors.each { |s| @graph.add_edge(@ast_node, s) }
         else
@@ -16,6 +18,10 @@ module RDG
       end
 
       private
+
+      def remove_all_successors
+        @graph.each_successor(@ast_node) { |s| @graph.remove_edge(@ast_node, s) }
+      end
 
       def successors
         @graph

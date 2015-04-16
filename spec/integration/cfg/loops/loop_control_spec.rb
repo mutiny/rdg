@@ -12,9 +12,8 @@ module RDG
         expect(cfg).to flow_between("true", "a += 1")
         expect(cfg).to flow_between("true", "z = 1")
         expect(cfg).to flow_between("a += 1", "break")
-        expect(cfg).to flow_between("break", "b += 1")
-        expect(cfg).to flow_between("b += 1", "true")
         expect(cfg).to flow_between("break", "z = 1")
+        expect(cfg).to flow_between("b += 1", "true")
       end
 
       %w(next redo).each do |kind|
@@ -27,9 +26,8 @@ module RDG
           expect(cfg).to flow_between("true", "a += 1")
           expect(cfg).to flow_between("true", "z = 1")
           expect(cfg).to flow_between("a += 1", "#{kind}")
-          expect(cfg).to flow_between("#{kind}", "b += 1")
-          expect(cfg).to flow_between("b += 1", "true")
           expect(cfg).to flow_between("#{kind}", "true")
+          expect(cfg).to flow_between("b += 1", "true")
         end
       end
     end
