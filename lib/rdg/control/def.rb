@@ -5,12 +5,19 @@ module RDG
 
       def initialize(ast_node, graph)
         super(ast_node, graph)
-        @name, @args, @body = ast_node.children
+        _name, _args, @body = ast_node.children
       end
 
-      def analyse
-        @graph.add_edge(@name, @body)
-        remove_non_flow_vertices
+      def internal_flow_edges
+        []
+      end
+
+      def start_nodes
+        [@body]
+      end
+
+      def end_nodes
+        [@body]
       end
     end
   end

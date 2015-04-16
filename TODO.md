@@ -38,8 +38,8 @@
 
 ### Exceptions
 - [x] `begin` / `rescue`
-- [ ] def / `rescue`
-- [ ] multiple `rescues`
+- [x] def / `rescue`
+- [x] multiple `rescues`
 - [ ] `retry`
 - [ ] `ensure` part
 - [ ] `else` part
