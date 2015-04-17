@@ -43,7 +43,7 @@ module RDG
       def propogate_incoming_flow
         @graph.each_predecessor(@ast_node) do |predecessor|
           @graph.remove_edge(predecessor, @ast_node)
-          start_nodes.each { |n| @graph.add_edge(predecessor, n) }
+          @graph.add_edge(predecessor, start_node)
         end
       end
 
@@ -59,7 +59,7 @@ module RDG
       end
 
       def add_equivalences
-        @equivalences.add(@ast_node, start_nodes)
+        @equivalences.add(@ast_node, start_node)
       end
     end
   end

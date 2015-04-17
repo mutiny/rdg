@@ -13,7 +13,7 @@ module RDG
         end
 
         it "should have control flow start at the expression" do
-          expect(subject.start_nodes).to eq([:test])
+          expect(subject.start_node).to eq(:test)
         end
 
         it "should have control flow edge between test and action" do
@@ -37,7 +37,7 @@ module RDG
         end
 
         it "should have control flow start at the expression" do
-          expect(subject.start_nodes).to eq([:test])
+          expect(subject.start_node).to eq(:test)
         end
 
         it "should have control flow edge between test and action" do

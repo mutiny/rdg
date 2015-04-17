@@ -8,7 +8,7 @@ module RDG
         subject { Case.new(ast, nil) }
 
         it "should have control flow start at the expression" do
-          expect(subject.start_nodes).to eq([:expression])
+          expect(subject.start_node).to eq(:expression)
         end
 
         it "should have control flow end at the when part" do
@@ -25,7 +25,7 @@ module RDG
         subject { Case.new(ast, nil) }
 
         it "should have control flow start at the expression" do
-          expect(subject.start_nodes).to eq([:expression])
+          expect(subject.start_node).to eq(:expression)
         end
 
         it "should have control flow end at the when and alternative" do
@@ -45,7 +45,7 @@ module RDG
         subject { Case.new(ast, nil) }
 
         it "should have control flow start at the expression" do
-          expect(subject.start_nodes).to eq([:expression])
+          expect(subject.start_node).to eq(:expression)
         end
 
         it "should have control flow end at the whens and alternative" do

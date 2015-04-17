@@ -12,8 +12,8 @@ module RDG
             [[:s1, :e1], [:s2, :e2]]
           end
 
-          def start_nodes
-            [:s1, :s2]
+          def start_node
+            :s1
           end
 
           def end_nodes
@@ -31,14 +31,13 @@ module RDG
         expect(graph).to have_received(:add_edge).with(:s2, :e2)
       end
 
-      it "should move any incoming edges to start nodes" do
+      it "should move any incoming edges to start node" do
         allow(graph).to receive(:each_predecessor).and_yield(:predecessor)
 
         subject.analyse
 
         expect(graph).to have_received(:remove_edge).with(:predecessor, ast)
         expect(graph).to have_received(:add_edge).with(:predecessor, :s1)
-        expect(graph).to have_received(:add_edge).with(:predecessor, :s2)
       end
 
       it "should move any outgoing edges to end nodes" do

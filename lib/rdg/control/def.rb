@@ -11,8 +11,8 @@ module RDG
         []
       end
 
-      def start_nodes
-        [@body]
+      def start_node
+        @body
       end
 
       def end_nodes

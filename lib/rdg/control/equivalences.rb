@@ -11,9 +11,9 @@ module RDG
 
       def find(original)
         if @equivalences.key?(original)
-          @equivalences[original].map { |result| find(result) }.flatten
+          find(@equivalences[original])
         else
-          [original]
+          original
         end
       end
     end

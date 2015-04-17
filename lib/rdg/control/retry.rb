@@ -8,7 +8,7 @@ module RDG
       def analyse
         return unless block
         remove_all_successors
-        add_first_child_of_rescued_block_as_successor
+        add_first_child_as_successor
       end
 
       private
@@ -17,10 +17,12 @@ module RDG
         @graph.each_successor(@ast_node) { |s| @graph.remove_edge(@ast_node, s) }
       end
 
-      def add_first_child_of_rescued_block_as_successor
-        @equivalences.find(block.children.first).each do |c|
-          @graph.add_edge(@ast_node, c)
-        end
+      def add_first_child_as_successor
+        @graph.add_edge(@ast_node, first_child_of_block)
+      end
+
+      def first_child_of_block
+        @equivalences.find(block.children.first)
       end
 
       def block

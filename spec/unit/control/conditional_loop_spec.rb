@@ -7,7 +7,7 @@ module RDG
       subject { ConditionalLoop.new(ast, nil) }
 
       it "should have control flow start at the predicate" do
-        expect(subject.start_nodes).to eq([:predicate])
+        expect(subject.start_node).to eq(:predicate)
       end
 
       it "should have control flow end at the predicate" do

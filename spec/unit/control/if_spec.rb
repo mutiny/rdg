@@ -8,7 +8,7 @@ module RDG
         subject { If.new(ast, nil) }
 
         it "should have control flow start at the predicate" do
-          expect(subject.start_nodes).to eq([:predicate])
+          expect(subject.start_node).to eq(:predicate)
         end
 
         it "should have control flow end at the predicate and the consequence" do
@@ -25,7 +25,7 @@ module RDG
         subject { If.new(ast, nil) }
 
         it "should have control flow start at the predicate" do
-          expect(subject.start_nodes).to eq([:predicate])
+          expect(subject.start_node).to eq(:predicate)
         end
 
         it "should have control flow end at the predicate and the alternative" do
@@ -42,7 +42,7 @@ module RDG
         subject { If.new(ast, nil) }
 
         it "should have control flow start at the predicate" do
-          expect(subject.start_nodes).to eq([:predicate])
+          expect(subject.start_node).to eq(:predicate)
         end
 
         it "should have control flow end at the consequences" do
@@ -62,7 +62,7 @@ module RDG
         subject { If.new(ast, nil) }
 
         it "should have control flow start at the predicate" do
-          expect(subject.start_nodes).to eq([:predicate])
+          expect(subject.start_node).to eq(:predicate)
         end
 
         it "should have control flow end at the consequences" do

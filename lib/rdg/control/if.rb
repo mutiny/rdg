@@ -13,8 +13,8 @@ module RDG
         @consequences.map { |consequence| [@predicate, consequence] }
       end
 
-      def start_nodes
-        [@predicate]
+      def start_node
+        @predicate
       end
 
       def end_nodes

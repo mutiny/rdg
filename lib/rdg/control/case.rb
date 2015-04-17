@@ -13,8 +13,8 @@ module RDG
         children.reject(&:empty?).each_cons(2).to_a
       end
 
-      def start_nodes
-        [@expression]
+      def start_node
+        @expression
       end
 
       def end_nodes

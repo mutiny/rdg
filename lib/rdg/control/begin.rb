@@ -9,8 +9,8 @@ module RDG
         children.each_cons(2).to_a
       end
 
-      def start_nodes
-        children.first(1)
+      def start_node
+        children.first
       end
 
       def end_nodes

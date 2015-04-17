@@ -13,8 +13,8 @@ module RDG
         [[@test, @action]]
       end
 
-      def start_nodes
-        [@test]
+      def start_node
+        @test
       end
 
       def propogate_outgoing_flow

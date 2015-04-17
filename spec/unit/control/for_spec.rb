@@ -7,7 +7,7 @@ module RDG
       subject { For.new(ast, nil) }
 
       it "should have control flow start at the iterable object" do
-        expect(subject.start_nodes).to eq([:iterable])
+        expect(subject.start_node).to eq(:iterable)
       end
 
       it "should have control flow end at the iterable object" do

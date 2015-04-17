@@ -13,7 +13,7 @@ module RDG
         if (@ast_node.type == :break)
           successors.each { |s| @graph.add_edge(@ast_node, s) }
         else
-          test_nodes.each { |n| @graph.add_edge(@ast_node, n) }
+          @graph.add_edge(@ast_node, test)
         end
       end
 
@@ -24,14 +24,12 @@ module RDG
       end
 
       def successors
-        test_nodes.map do |test_node|
-          @graph
-            .each_successor(test_node)
-            .reject { |s| @ast_node.siblings.include?(s) }
-        end.flatten
+        @graph
+          .each_successor(test)
+          .reject { |s| @ast_node.siblings.include?(s) }
       end
 
-      def test_nodes
+      def test
         @equivalences.find(loop.children.first)
       end
 

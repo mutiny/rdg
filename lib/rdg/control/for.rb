@@ -13,8 +13,8 @@ module RDG
         [[@iterable, @body], [@body, @iterable]]
       end
 
-      def start_nodes
-        [@iterable]
+      def start_node
+        @iterable
       end
 
       def end_nodes
