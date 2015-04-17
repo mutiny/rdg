@@ -8,7 +8,7 @@ module RDG
       def new_successors
         @graph
           .each_successor(test)
-          .reject { |s| @ast_node.siblings.include?(s) }
+          .reject { |s| s.ancestors.include?(block) }
       end
 
       def test

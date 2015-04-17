@@ -14,6 +14,25 @@ module RDG
         expect(cfg).to flow_between("a += 1", "break")
         expect(cfg).to flow_between("break", "z = 1")
         expect(cfg).to flow_between("b += 1", "true")
+
+        expect(cfg).not_to flow_between("break", "a += 1")
+      end
+
+      it "should show control flowing from nested break only to successor" do
+        cfg = CFG.from_source("a = 1; while true do; a += 1; break if false; b += 1; end; z = 1")
+
+        expect(cfg).to contain("a = 1", "true", "a += 1", "break", "false", "b += 1", "z = 1")
+
+        expect(cfg).to flow_between("a = 1", "true")
+        expect(cfg).to flow_between("true", "a += 1")
+        expect(cfg).to flow_between("true", "z = 1")
+        expect(cfg).to flow_between("a += 1", "false")
+        expect(cfg).to flow_between("false", "break")
+        expect(cfg).to flow_between("false", "b += 1")
+        expect(cfg).to flow_between("break", "z = 1")
+        expect(cfg).to flow_between("b += 1", "true")
+
+        expect(cfg).not_to flow_between("break", "a += 1")
       end
 
       %w(next redo).each do |kind|
