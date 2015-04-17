@@ -5,16 +5,12 @@ module RDG
         @equivalences = {}
       end
 
-      def add(original, results)
-        @equivalences[original] = results
+      def add(original, result)
+        @equivalences[original] = result
       end
 
       def find(original)
-        if @equivalences.key?(original)
-          find(@equivalences[original])
-        else
-          original
-        end
+        @equivalences.key?(original) ? find(@equivalences[original]) : original
       end
     end
   end
