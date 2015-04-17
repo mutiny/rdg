@@ -55,5 +55,17 @@ module RDG
         end
       end
     end
+
+    context "for complex loop test" do
+      %w(next redo).each do |kind|
+        it "should show control flow from #{kind} to children of inner loop's test" do
+          cfg = CFG.from_source("a = 1;" \
+                                "while 42 ? :foo : 'bar' do; a += 1; #{kind}; b += 1; end;" \
+                                "z = 1;")
+
+          expect(cfg).to flow_between("#{kind}", "42")
+        end
+      end
+    end
   end
 end
