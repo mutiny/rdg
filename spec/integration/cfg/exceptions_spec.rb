@@ -29,14 +29,27 @@ module RDG
 
         it "should show control flowing out of the last child and the handlers" do
           cfg = CFG.from_source(
-            "#{block_type}; a = 1; rescue Err; w = 1; x = 1; rescue; y = 1; end; z = 1"
+            "#{block_type}; a = 1; b = 1; rescue Err; w = 1; x = 1; rescue; y = 1; end; z = 1"
           )
 
-          expect(cfg).to contain("a = 1", "x = 1", "w  = 1", "y = 1", "z = 1")
+          expect(cfg).to contain("a = 1", "b = 1", "x = 1", "w  = 1", "y = 1", "z = 1")
 
-          expect(cfg).to flow_between("a = 1", "z = 1")
+          expect(cfg).to flow_between("b = 1", "z = 1")
           expect(cfg).to flow_between("x = 1", "z = 1")
           expect(cfg).to flow_between("y = 1", "z = 1")
+        end
+
+        it "should show control flowing out from out of last child through an else" do
+          cfg = CFG.from_source(
+            "#{block_type}; a = 1; b = 1; rescue Err; w = 1; x = 1; else; y = 1; end; z = 1"
+          )
+
+          expect(cfg).to contain("a = 1", "b = 1", "x = 1", "w  = 1", "y = 1", "z = 1")
+
+          expect(cfg).to flow_between("b = 1", "y = 1")
+          expect(cfg).to flow_between("y = 1", "z = 1")
+
+          expect(cfg).not_to flow_between("b = 1", "z = 1")
         end
 
         it "retrying should return control to the start of the block" do
