@@ -8,4 +8,8 @@ class FakeAst
   def empty?
     false
   end
+
+  def parent
+    ancestors.first
+  end
 end

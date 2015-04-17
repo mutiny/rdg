@@ -2,15 +2,16 @@ require_relative "propagater"
 
 module RDG
   module Control
-    class Def < Propagater
-      register_analyser :def
+    class Ensure < Propagater
+      register_analyser :ensure
 
       def prepare
-        _name, _args, @body = children
+        @body, @finaliser = nodes
+        customise(@finaliser, Handler)
       end
 
       def internal_flow_edges
-        []
+        [[@body, @finaliser]]
       end
 
       def start_node
@@ -18,11 +19,7 @@ module RDG
       end
 
       def end_nodes
-        [@body]
-      end
-
-      def nodes
-        [@body]
+        [@finaliser]
       end
     end
   end

@@ -1,13 +1,13 @@
-require "rdg/control/analyser"
+require "rdg/control/propagater"
 
 module RDG
   module Control
-    describe Analyser do
+    describe Propagater do
       let(:ast) { FakeAst.new(:some_type) }
       let(:graph) { spy("graph") }
 
       subject do
-        class DummyAnalyser < Analyser
+        class DummyPropagater < Propagater
           def internal_flow_edges
             [[:s1, :e1], [:s2, :e2]]
           end
@@ -21,7 +21,7 @@ module RDG
           end
         end
 
-        DummyAnalyser.new(ast, graph)
+        DummyPropagater.new(ast, graph)
       end
 
       it "should add a CFG edge for every internal flow edge" do

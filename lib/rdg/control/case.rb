@@ -1,16 +1,16 @@
-require_relative "analyser"
+require_relative "propagater"
 
 module RDG
   module Control
-    class Case < Analyser
+    class Case < Propagater
       register_analyser :case
 
       def prepare
-        @expression, *@consequences = children.reject(&:empty?)
+        @expression, *@consequences = nodes
       end
 
       def internal_flow_edges
-        children.reject(&:empty?).each_cons(2).to_a
+        nodes.each_cons(2).to_a
       end
 
       def start_node

@@ -1,8 +1,8 @@
-require_relative "analyser"
+require_relative "propagater"
 
 module RDG
   module Control
-    class When < Analyser
+    class When < Propagater
       register_analyser :when
 
       def prepare

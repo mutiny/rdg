@@ -1,12 +1,14 @@
-require_relative "analyser"
+require_relative "propagater"
+require_relative "handler"
 
 module RDG
   module Control
-    class Rescue < Analyser
+    class Rescue < Propagater
       register_analyser :rescue
 
       def prepare
         @main, *@handlers, @alternative = children
+        @handlers.each { |h| customise(h, Handler) }
       end
 
       def internal_flow_edges

@@ -1,14 +1,9 @@
-require_relative "analyser"
+require_relative "propagater"
 
 module RDG
   module Control
-    class RescueBody < Analyser
+    class RescueBody < Propagater
       register_analyser :resbody
-
-      def analyse
-        add_edge_from_every_rescuable_node_to_handler
-        super
-      end
 
       def prepare
         _exception_types, _variable_name, *@statements = children
@@ -28,20 +23,6 @@ module RDG
 
       def nodes
         @statements
-      end
-
-      def add_edge_from_every_rescuable_node_to_handler
-        main.each { |m| @graph.add_edge(m, @ast_node) }
-      end
-
-      private
-
-      def main
-        @equivalences.all(rescue_block.children.first)
-      end
-
-      def rescue_block
-        @ast_node.ancestors.detect { |a| a.type == :rescue }
       end
     end
   end

@@ -1,8 +1,8 @@
-require_relative "analyser"
+require_relative "propagater"
 
 module RDG
   module Control
-    class If < Analyser
+    class If < Propagater
       register_analyser :if
 
       def prepare

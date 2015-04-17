@@ -1,8 +1,8 @@
-require_relative "analyser"
+require_relative "propagater"
 
 module RDG
   module Control
-    class ConditionalLoop < Analyser
+    class ConditionalLoop < Propagater
       register_analyser :while, :until
 
       def prepare

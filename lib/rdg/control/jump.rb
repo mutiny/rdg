@@ -4,6 +4,7 @@ module RDG
   module Control
     class Jump < Analyser
       def analyse
+        super
         return unless block
         remove_all_successors
         add_new_successors
