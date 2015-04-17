@@ -5,8 +5,7 @@ module RDG
     class Case < Analyser
       register_analyser :case
 
-      def initialize(ast_node, graph, equivalences = Equivalences.new)
-        super(ast_node, graph, equivalences)
+      def prepare
         @expression, *@consequences = children.reject(&:empty?)
       end
 

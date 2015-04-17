@@ -16,6 +16,10 @@ module RDG
 
       def initialize(ast_node, graph, equivalences = Equivalences.new)
         @ast_node, @graph, @equivalences = ast_node, graph, equivalences
+        prepare
+      end
+
+      def prepare
       end
 
       def analyse

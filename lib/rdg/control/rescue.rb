@@ -5,8 +5,7 @@ module RDG
     class Rescue < Analyser
       register_analyser :rescue
 
-      def initialize(ast_node, graph, equivalences = Equivalences.new)
-        super(ast_node, graph, equivalences)
+      def prepare
         @main, *@fallbacks = children.reject(&:empty?)
       end
 

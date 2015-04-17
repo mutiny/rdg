@@ -5,8 +5,7 @@ module RDG
     class For < Analyser
       register_analyser :for
 
-      def initialize(ast_node, graph, equivalences = Equivalences.new)
-        super(ast_node, graph, equivalences)
+      def prepare
         _, @iterable, @body = children
       end
 

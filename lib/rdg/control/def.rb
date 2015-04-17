@@ -3,9 +3,8 @@ module RDG
     class Def < Analyser
       register_analyser :def
 
-      def initialize(ast_node, graph, equivalences = Equivalences.new)
-        super(ast_node, graph, equivalences)
-        _name, _args, @body = ast_node.children
+      def prepare
+        _name, _args, @body = children
       end
 
       def internal_flow_edges
