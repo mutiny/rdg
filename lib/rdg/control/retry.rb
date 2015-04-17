@@ -22,7 +22,7 @@ module RDG
       end
 
       def first_child_of_block
-        @equivalences.find(block.children.first)
+        @equivalences.first(block.children.first)
       end
 
       def block

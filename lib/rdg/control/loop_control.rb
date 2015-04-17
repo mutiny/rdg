@@ -30,7 +30,7 @@ module RDG
       end
 
       def test
-        @equivalences.find(loop.children.first)
+        @equivalences.first(loop.children.first)
       end
 
       def loop

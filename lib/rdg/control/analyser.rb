@@ -36,6 +36,10 @@ module RDG
         @ast_node.children
       end
 
+      def nodes
+        children.reject(&:empty?)
+      end
+
       def add_internal_flow_edges
         internal_flow_edges.each { |s, t| @graph.add_edge(s, t) }
       end
@@ -59,7 +63,7 @@ module RDG
       end
 
       def add_equivalences
-        @equivalences.add(@ast_node, start_node)
+        @equivalences.add(@ast_node, nodes)
       end
     end
   end

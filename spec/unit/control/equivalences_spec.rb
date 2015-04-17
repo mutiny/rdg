@@ -5,19 +5,24 @@ module RDG
     describe Equivalences do
       let(:ast) { FakeAst.new(:begin, children: [1, 2, 3]) }
 
-      it "finds direct equivalent" do
-        subject.add(:if, :test)
-        expect(subject.find(:if)).to eq(:test)
-      end
+      context "all" do
+        it "returns direct equivalents" do
+          subject.add(:if, [:predicate, :consequence])
 
-      it "finds indirect equivalent transitively" do
-        subject.add(:if, :send)
-        subject.add(:send, :test)
-        expect(subject.find(:if)).to eq(:test)
-      end
+          expect(subject.all(:if)).to eq([:predicate, :consequence])
+        end
 
-      it "returns the original when there is no equivalent" do
-        expect(subject.find(:if)).to eq(:if)
+        it "returns indirect equivalents transitively" do
+          subject.add(:if, [:predicate, :consequence])
+          subject.add(:predicate, [:send, :float])
+          subject.add(:consequence, [:return])
+
+          expect(subject.all(:if)).to eq([:send, :float, :return])
+        end
+
+        it "returns the original when there is no equivalent" do
+          expect(subject.first(:if)).to eq(:if)
+        end
       end
     end
   end

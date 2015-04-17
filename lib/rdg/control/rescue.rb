@@ -5,24 +5,16 @@ module RDG
     class Rescue < Analyser
       register_analyser :rescue
 
-      def prepare
-        @main, *@fallbacks = children.reject(&:empty?)
-      end
-
       def internal_flow_edges
-        if @main.type == :begin
-          @main.children.product(@fallbacks)
-        else
-          [@main].product(@fallbacks)
-        end
+        []
       end
 
       def start_node
-        @main
+        children.first
       end
 
       def end_nodes
-        [@main] + @fallbacks
+        nodes
       end
     end
   end

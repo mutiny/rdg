@@ -3,7 +3,7 @@ require "rdg/control/analyser"
 module RDG
   module Control
     describe Analyser do
-      let(:ast) { double("ast") }
+      let(:ast) { FakeAst.new(:some_type) }
       let(:graph) { spy("graph") }
 
       subject do

@@ -20,6 +20,10 @@ module RDG
       def end_nodes
         [@iterable]
       end
+
+      def nodes
+        [@iterable, @body]
+      end
     end
   end
 end
