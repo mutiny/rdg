@@ -6,7 +6,7 @@ module RDG
       register_analyser :while, :until
 
       def prepare
-        @predicate, @body = children
+        @predicate, @body = nodes
       end
 
       def internal_flow_edges
