@@ -1,47 +1,40 @@
-require_relative "equivalences"
+require_relative "context"
+require_relative "registry"
 
 module RDG
   module Control
     class Analyser
-      ANALYSERS = {}
-
       def self.register_analyser(*types)
-        types.each { |type| ANALYSERS[type] = self }
+        Registry.register_by_type(self, *types)
       end
 
       def self.register_default_analyser
-        ANALYSERS.default = self
+        Registry.register_default(self)
       end
 
-      def self.for(ast_node, graph, equivalences)
-        ANALYSERS[ast_node.type].new(ast_node, graph, equivalences)
-      end
-
-      def initialize(ast_node, graph, equivalences = Equivalences.new)
-        @ast_node, @graph, @equivalences = ast_node, graph, equivalences
+      def initialize(ast_node, context = Context.new)
+        @ast_node, @context = ast_node, context
         prepare
       end
 
-      def prepare # make private?
-      end
-
       def analyse
-        run_customisations
       end
 
       private
 
-      def customise(node, customisation)
-        Analyser.customisations[node] = customisation
+      def prepare
       end
 
-      def run_customisations
-        return unless Analyser.customisations.key?(@ast_node)
-        Analyser.customisations[@ast_node].new(@ast_node, @graph, @equivalences).analyse
+      def graph
+        @context.graph
       end
 
-      def self.customisations
-        @customisations ||= {}
+      def equivalences
+        @context.equivalences
+      end
+
+      def registry
+        @context.registry
       end
     end
   end

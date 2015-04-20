@@ -10,11 +10,11 @@ module RDG
       private
 
       def add_an_edge_from_every_main_node_to_the_handler
-        main.each { |m| @graph.add_edge(m, @ast_node) }
+        main.each { |m| graph.add_edge(m, @ast_node) }
       end
 
       def main
-        @equivalences.all(block.children.first)
+        equivalences.all(block.children.first)
       end
 
       def block

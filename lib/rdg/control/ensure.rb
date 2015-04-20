@@ -7,7 +7,11 @@ module RDG
 
       def prepare
         @body, @finaliser = nodes
-        customise(@finaliser, Handler)
+      end
+
+      def analyse
+        super
+        registry.prepend_for(@finaliser, Handler)
       end
 
       def internal_flow_edges

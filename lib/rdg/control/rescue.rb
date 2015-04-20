@@ -8,7 +8,11 @@ module RDG
 
       def prepare
         @main, *@handlers, @alternative = children
-        @handlers.each { |h| customise(h, Handler) }
+      end
+
+      def analyse
+        super
+        @handlers.each { |h| registry.prepend_for(h, Handler) }
       end
 
       def internal_flow_edges

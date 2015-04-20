@@ -5,11 +5,12 @@ module RDG
     describe Handler do
       let(:graph) { spy("graph") }
       let(:equivalences) { spy("equivalences") }
+      let(:context) { Context.new(graph, equivalences) }
 
       let(:block_ast) { FakeAst.new(:rescue, children: [:rescuable]) }
       let(:ast) { FakeAst.new(:resbody, ancestors: [block_ast]) }
 
-      subject { Handler.new(ast, graph, equivalences) }
+      subject { Handler.new(ast, context) }
 
       it "should add edges from main to handler" do
         allow(equivalences).to receive(:all).with(:rescuable).and_return(

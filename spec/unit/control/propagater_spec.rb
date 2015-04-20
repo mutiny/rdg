@@ -5,6 +5,7 @@ module RDG
     describe Propagater do
       let(:ast) { FakeAst.new(:some_type) }
       let(:graph) { spy("graph") }
+      let(:context) { Context.new(graph) }
 
       subject do
         class DummyPropagater < Propagater
@@ -21,7 +22,7 @@ module RDG
           end
         end
 
-        DummyPropagater.new(ast, graph)
+        DummyPropagater.new(ast, context)
       end
 
       it "should add a CFG edge for every internal flow edge" do

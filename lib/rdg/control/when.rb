@@ -18,9 +18,9 @@ module RDG
       end
 
       def propogate_outgoing_flow
-        successors = @graph.each_successor(@ast_node).to_a
-        @graph.add_edge(@test, successors.first)
-        @graph.add_edge(@action, successors.last)
+        successors = graph.each_successor(@ast_node).to_a
+        graph.add_edge(@test, successors.first)
+        graph.add_edge(@action, successors.last)
       end
     end
   end

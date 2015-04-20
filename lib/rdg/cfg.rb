@@ -1,6 +1,5 @@
 require "require_all"
 
-require_relative "rgl/bidirected_adjacency_graph"
 require_relative "tree/ast"
 require_rel "control/*"
 
@@ -15,33 +14,32 @@ module RDG
     end
 
     def initialize(ast)
-      @graph = RDG::RGL::BidirectedAdjacencyGraph.new
-      @graph.add_vertex(ast.root)
-      @equivalences = Control::Equivalences.new
+      @context = Control::Context.new
+      @context.graph.add_vertex(ast.root)
       analyse(ast)
     end
 
     def write_to_graphic_file(format = 'png', filename = "cfg")
-      @graph.write_to_graphic_file(format, filename)
+      @context.graph.write_to_graphic_file(format, filename)
     end
 
     def vertices
-      @graph.each_vertex.to_a
+      @context.graph.each_vertex.to_a
     end
 
     def successors(v)
-      @graph.each_adjacent(v).to_a
+      @context.graph.each_adjacent(v).to_a
     end
 
     def edge?(u, v)
-      @graph.has_edge?(u, v)
+      @context.graph.has_edge?(u, v)
     end
 
     private
 
     def analyse(ast)
       ast.pre_order_iterator.select(&:compound?).each do |ast_node|
-        Control::Analyser.for(ast_node, @graph, @equivalences).analyse
+        @context.registry.analyser_for(ast_node, @context).analyse
       end
     end
   end
