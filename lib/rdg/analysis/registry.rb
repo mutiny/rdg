@@ -1,14 +1,16 @@
 module RDG
   module Analysis
     class Registry
-      BY_TYPE = {}
-
       def self.register_by_type(analyser, *types)
-        types.each { |type| BY_TYPE[type] = analyser }
+        types.each { |type| by_type[type] = analyser }
       end
 
       def self.register_default(analyser)
-        BY_TYPE.default = analyser
+        by_type.default = analyser
+      end
+
+      def self.clear
+        by_type.clear
       end
 
       def analyser_for(ast_node, context)
@@ -21,8 +23,12 @@ module RDG
 
       private
 
+      def self.by_type
+        @by_type ||= {}
+      end
+
       def by_node
-        @by_node ||= Hash.new { |h, node| h[node] = BY_TYPE[node.type] }
+        @by_node ||= Hash.new { |h, node| h[node] = Registry.by_type[node.type] }
       end
     end
   end

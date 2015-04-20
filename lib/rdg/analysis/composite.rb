@@ -11,7 +11,7 @@ module RDG
         end
       end
 
-      def initialize(ast_node, context)
+      def initialize(ast_node, context = Context.new)
         @delegates = types.map { |t| t.new(ast_node, context) }
       end
 

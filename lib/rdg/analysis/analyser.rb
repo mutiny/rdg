@@ -4,6 +4,9 @@ require_relative "registry"
 module RDG
   module Analysis
     class Analyser
+      extend Forwardable
+      def_delegators :@context, :graph, :equivalences, :registry
+
       def self.register_analyser(*types)
         Registry.register_by_type(self, *types)
       end
@@ -17,24 +20,10 @@ module RDG
         prepare
       end
 
-      def analyse
-      end
-
       private
 
       def prepare
-      end
-
-      def graph
-        @context.graph
-      end
-
-      def equivalences
-        @context.equivalences
-      end
-
-      def registry
-        @context.registry
+        # do nothing
       end
     end
   end

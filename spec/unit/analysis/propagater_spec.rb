@@ -5,12 +5,13 @@ module RDG
     describe Propagater do
       let(:ast) { FakeAst.new(:some_type) }
       let(:graph) { spy("graph") }
-      let(:context) { Context.new(graph) }
+      let(:equivalences) { spy("equivalences") }
+      let(:context) { Context.new(graph, equivalences) }
 
       subject do
         class DummyPropagater < Propagater
           def internal_flow_edges
-            [[:s1, :e1], [:s2, :e2]]
+            [%i(s1 e1), %i(s2 e2)]
           end
 
           def start_node
@@ -18,7 +19,11 @@ module RDG
           end
 
           def end_nodes
-            [:e1, :e2]
+            %i(e1 e2)
+          end
+
+          def nodes
+            %i(s1 s2 e1 e2)
           end
         end
 
@@ -55,6 +60,12 @@ module RDG
         subject.analyse
 
         expect(graph).to have_received(:remove_vertex).with(ast)
+      end
+
+      it "should add equivalences" do
+        subject.analyse
+
+        expect(equivalences).to have_received(:add).with(ast, %i(s1 s2 e1 e2))
       end
     end
   end
