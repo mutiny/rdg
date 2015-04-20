@@ -4,7 +4,7 @@ module RDG
   module Control
     describe RescueBody do
       let(:ast) { FakeAst.new(:resbody, children: [:ts, :e, 1, 2, 3]) }
-      subject { RescueBody.new(ast, nil) }
+      subject { RescueBody.new(ast) }
 
       it "should have control flow start at the first child" do
         expect(subject.start_node).to eq(1)

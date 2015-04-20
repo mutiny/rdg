@@ -5,7 +5,7 @@ module RDG
     describe If do
       context "without any alternatives" do
         let(:ast) { FakeAst.new(:if, children: [:predicate, :consequence, :""]) }
-        subject { If.new(ast, nil) }
+        subject { If.new(ast) }
 
         it "should have control flow start at the predicate" do
           expect(subject.start_node).to eq(:predicate)
@@ -22,7 +22,7 @@ module RDG
 
       context "without any consequence (i.e., the `parser` gem's representation of unless)" do
         let(:ast) { FakeAst.new(:if, children: [:predicate, :"", :alternative]) }
-        subject { If.new(ast, nil) }
+        subject { If.new(ast) }
 
         it "should have control flow start at the predicate" do
           expect(subject.start_node).to eq(:predicate)
@@ -39,7 +39,7 @@ module RDG
 
       context "with one alternative" do
         let(:ast) { FakeAst.new(:if, children: [:predicate, :consequence, :alternative]) }
-        subject { If.new(ast, nil) }
+        subject { If.new(ast) }
 
         it "should have control flow start at the predicate" do
           expect(subject.start_node).to eq(:predicate)
@@ -59,7 +59,7 @@ module RDG
 
       context "with several alternatives" do
         let(:ast) { FakeAst.new(:if, children: [:predicate, :consequence, :a1, :a2, :a3]) }
-        subject { If.new(ast, nil) }
+        subject { If.new(ast) }
 
         it "should have control flow start at the predicate" do
           expect(subject.start_node).to eq(:predicate)

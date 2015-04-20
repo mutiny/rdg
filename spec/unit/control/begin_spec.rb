@@ -4,7 +4,7 @@ module RDG
   module Control
     describe Begin do
       let(:ast) { FakeAst.new(:begin, children: [1, 2, 3]) }
-      subject { Begin.new(ast, nil) }
+      subject { Begin.new(ast) }
 
       it "should have control flow start at the first child" do
         expect(subject.start_node).to eq(1)

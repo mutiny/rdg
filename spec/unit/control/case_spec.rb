@@ -5,7 +5,7 @@ module RDG
     describe Case do
       context "sole (when) part" do
         let(:ast) { FakeAst.new(:case, children: [:expression, :when, :""]) }
-        subject { Case.new(ast, nil) }
+        subject { Case.new(ast) }
 
         it "should have control flow start at the expression" do
           expect(subject.start_node).to eq(:expression)
@@ -22,7 +22,7 @@ module RDG
 
       context "with else part" do
         let(:ast) { FakeAst.new(:case, children: [:expression, :when, :alt]) }
-        subject { Case.new(ast, nil) }
+        subject { Case.new(ast) }
 
         it "should have control flow start at the expression" do
           expect(subject.start_node).to eq(:expression)
@@ -42,7 +42,7 @@ module RDG
 
       context "with several alternatives" do
         let(:ast) { FakeAst.new(:case, children: [:expression, :when1, :when2, :when3, :alt]) }
-        subject { Case.new(ast, nil) }
+        subject { Case.new(ast) }
 
         it "should have control flow start at the expression" do
           expect(subject.start_node).to eq(:expression)

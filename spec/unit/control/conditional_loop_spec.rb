@@ -4,7 +4,7 @@ module RDG
   module Control
     describe ConditionalLoop do
       let(:ast) { FakeAst.new(:while, children: [:predicate, :body]) }
-      subject { ConditionalLoop.new(ast, nil) }
+      subject { ConditionalLoop.new(ast) }
 
       it "should have control flow start at the predicate" do
         expect(subject.start_node).to eq(:predicate)
