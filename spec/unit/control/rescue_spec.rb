@@ -12,7 +12,7 @@ module RDG
 
       context "rescue without an else" do
         let(:ast) { FakeAst.new(:rescue, children: [main_ast, handler1, handler2, :""]) }
-        subject { Rescue.new(ast, context) }
+        subject { Rescue.new(ast) }
 
         it "should have control flow start at the main block" do
           expect(subject.start_node).to eq(main_ast)
@@ -27,7 +27,7 @@ module RDG
         end
 
         it "should prepend Handler so that edges back to main_ast are created for each handler" do
-          subject.analyse
+          subject.analyse(context)
 
           expect(registry).to have_received(:prepend_for).with(handler1, Handler)
           expect(registry).to have_received(:prepend_for).with(handler2, Handler)
@@ -36,7 +36,7 @@ module RDG
 
       context "rescue with an else" do
         let(:ast) { FakeAst.new(:rescue, children: [main_ast, handler1, handler2, :else]) }
-        subject { Rescue.new(ast, context) }
+        subject { Rescue.new(ast) }
 
         it "should have control flow start at the main block" do
           expect(subject.start_node).to eq(main_ast)
@@ -51,7 +51,7 @@ module RDG
         end
 
         it "should prepend Handler so that edges back to main_ast are created for each handler" do
-          subject.analyse
+          subject.analyse(context)
 
           expect(registry).to have_received(:prepend_for).with(handler1, Handler)
           expect(registry).to have_received(:prepend_for).with(handler2, Handler)

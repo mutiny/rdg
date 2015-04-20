@@ -5,8 +5,9 @@ module RDG
     class Return < Analysis::Analyser
       register_analyser :return
 
-      def analyse
-        graph.each_successor(@ast_node) { |s| graph.remove_edge(@ast_node, s) }
+      def analyse(context)
+        super
+        remove_all_successors
       end
     end
   end

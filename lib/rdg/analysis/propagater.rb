@@ -3,12 +3,14 @@ require_relative "analyser"
 module RDG
   module Analysis
     class Propagater < Analyser
-      def analyse
+      def analyse(context)
+        super
         add_internal_flow_edges
         propogate_incoming_flow
         propogate_outgoing_flow
         remove_non_flow_vertices
         add_equivalences
+        add_extra_analysers
       end
 
       private
@@ -45,6 +47,10 @@ module RDG
 
       def add_equivalences
         equivalences.add(@ast_node, nodes)
+      end
+
+      def add_extra_analysers
+        # do nothing
       end
     end
   end

@@ -13,12 +13,12 @@ module RDG
         by_type.clear
       end
 
-      def analyser_for(ast_node, context)
-        by_node[ast_node].new(ast_node, context)
+      def analyser_for(ast_node)
+        by_node[ast_node]
       end
 
       def prepend_for(ast_node, analyser)
-        by_node[ast_node] = Composite.compose(analyser, by_node[ast_node])
+        by_node[ast_node] = Composite.new(analyser.new(ast_node), by_node[ast_node])
       end
 
       private
@@ -28,7 +28,7 @@ module RDG
       end
 
       def by_node
-        @by_node ||= Hash.new { |h, node| h[node] = Registry.by_type[node.type] }
+        @by_node ||= Hash.new { |h, node| h[node] = Registry.by_type[node.type].new(node) }
       end
     end
   end

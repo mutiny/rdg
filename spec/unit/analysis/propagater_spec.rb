@@ -27,11 +27,11 @@ module RDG
           end
         end
 
-        DummyPropagater.new(ast, context)
+        DummyPropagater.new(ast)
       end
 
       it "should add a CFG edge for every internal flow edge" do
-        subject.analyse
+        subject.analyse(context)
 
         expect(graph).to have_received(:add_edge).with(:s1, :e1)
         expect(graph).to have_received(:add_edge).with(:s2, :e2)
@@ -40,7 +40,7 @@ module RDG
       it "should move any incoming edges to start node" do
         allow(graph).to receive(:each_predecessor).and_yield(:predecessor)
 
-        subject.analyse
+        subject.analyse(context)
 
         expect(graph).to have_received(:remove_edge).with(:predecessor, ast)
         expect(graph).to have_received(:add_edge).with(:predecessor, :s1)
@@ -49,7 +49,7 @@ module RDG
       it "should move any outgoing edges to end nodes" do
         allow(graph).to receive(:each_successor).and_yield(:successor)
 
-        subject.analyse
+        subject.analyse(context)
 
         expect(graph).to have_received(:remove_edge).with(ast, :successor)
         expect(graph).to have_received(:add_edge).with(:e1, :successor)
@@ -57,13 +57,13 @@ module RDG
       end
 
       it "should remove the AST node from the CFG" do
-        subject.analyse
+        subject.analyse(context)
 
         expect(graph).to have_received(:remove_vertex).with(ast)
       end
 
       it "should add equivalences" do
-        subject.analyse
+        subject.analyse(context)
 
         expect(equivalences).to have_received(:add).with(ast, %i(s1 s2 e1 e2))
       end

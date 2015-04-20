@@ -9,7 +9,7 @@ module RDG
       let(:main_ast) { FakeAst.new(:if) }
       let(:ensure_ast) { FakeAst.new(:send) }
       let(:ast) { FakeAst.new(:rescue, children: [main_ast, ensure_ast]) }
-      subject { Ensure.new(ast, context) }
+      subject { Ensure.new(ast) }
 
       it "should have control flow start at the main block" do
         expect(subject.start_node).to eq(main_ast)
@@ -24,7 +24,7 @@ module RDG
       end
 
       it "should prepend Handler so that edges back to main_ast are created for ensure block" do
-        subject.analyse
+        subject.analyse(context)
 
         expect(registry).to have_received(:prepend_for).with(ensure_ast, Handler)
       end

@@ -15,15 +15,23 @@ module RDG
         Registry.register_default(self)
       end
 
-      def initialize(ast_node, context = Context.new)
-        @ast_node, @context = ast_node, context
+      def initialize(ast_node)
+        @ast_node = ast_node
         prepare
+      end
+
+      def analyse(context = Context.new)
+        @context = context
       end
 
       private
 
       def prepare
         # do nothing
+      end
+
+      def remove_all_successors
+        graph.each_successor(@ast_node) { |s| graph.remove_edge(@ast_node, s) }
       end
     end
   end
