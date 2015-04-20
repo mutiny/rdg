@@ -17,6 +17,10 @@ module RDG
       it "should have control flow edges between each pair of children" do
         expect(subject.internal_flow_edges).to eq([[1, 2], [2, 3]])
       end
+
+      it "should have control flow nodes only for statements, and not for ex types or variable" do
+        expect(subject.nodes).to eq([1, 2, 3])
+      end
     end
   end
 end
