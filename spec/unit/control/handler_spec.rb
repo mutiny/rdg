@@ -5,7 +5,7 @@ module RDG
     describe Handler do
       let(:graph) { spy("graph") }
       let(:equivalences) { spy("equivalences") }
-      let(:context) { Context.new(graph, equivalences) }
+      let(:context) { Analysis::Context.new(graph, equivalences) }
 
       let(:block_ast) { FakeAst.new(:rescue, children: [:rescuable]) }
       let(:ast) { FakeAst.new(:resbody, ancestors: [block_ast]) }

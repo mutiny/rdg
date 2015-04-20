@@ -5,7 +5,7 @@ module RDG
     describe JumpToStart do
       let(:graph) { spy("graph") }
       let(:equivalences) { spy("equivalences") }
-      let(:context) { Context.new(graph, equivalences) }
+      let(:context) { Analysis::Context.new(graph, equivalences) }
 
       let(:block_ast) { FakeAst.new(:while, children: [:jumpable]) }
       let(:ast) { FakeAst.new(:thing, ancestors: [block_ast]) }

@@ -1,8 +1,8 @@
-require_relative "propagater"
+require "rdg/analysis/propagater"
 
 module RDG
   module Control
-    class Begin < Propagater
+    class Begin < Analysis::Propagater
       register_analyser :begin, :kwbegin
 
       def internal_flow_edges

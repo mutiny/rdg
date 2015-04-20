@@ -1,6 +1,8 @@
+require "rdg/analysis/analyser"
+
 module RDG
   module Control
-    class Return < Analyser
+    class Return < Analysis::Analyser
       register_analyser :return
 
       def analyse

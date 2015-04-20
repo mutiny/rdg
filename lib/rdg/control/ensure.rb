@@ -1,8 +1,8 @@
-require_relative "propagater"
+require "rdg/analysis/propagater"
 
 module RDG
   module Control
-    class Ensure < Propagater
+    class Ensure < Analysis::Propagater
       register_analyser :ensure
 
       def prepare

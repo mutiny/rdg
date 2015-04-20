@@ -50,7 +50,6 @@
 - [ ] propagater unit specs need to be completed (e.g., add equivalences)
 - [ ] analyser unit specs needed
 - [ ] registry unit specs needed
-- [ ] many files under rdg/control, so maybe break down into more subdirs?
 
 Exception control flow might be neater if there was some notion of hierarchy in the CFG. Right now, every statement within the rescuable block has a control flow edge to each of the exception handlers. It would be neater to have a single control flow edge from some kind of "parent" node which contains each of the statements in the rescuable block.
 

@@ -1,8 +1,8 @@
-require_relative "propagater"
+require "rdg/analysis/propagater"
 
 module RDG
   module Control
-    class Case < Propagater
+    class Case < Analysis::Propagater
       register_analyser :case
 
       def prepare

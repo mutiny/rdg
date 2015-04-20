@@ -3,7 +3,7 @@ require_relative "equivalences"
 require_relative "registry"
 
 module RDG
-  module Control
+  module Analysis
     class Context
       attr_reader :graph, :equivalences, :registry
 

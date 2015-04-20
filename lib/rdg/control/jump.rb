@@ -1,8 +1,8 @@
-require_relative "analyser"
+require "rdg/analysis/analyser"
 
 module RDG
   module Control
-    class Jump < Analyser
+    class Jump < Analysis::Analyser
       def analyse
         return unless block
         remove_all_successors

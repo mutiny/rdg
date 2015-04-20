@@ -1,9 +1,9 @@
-require_relative "propagater"
+require "rdg/analysis/propagater"
 require_relative "handler"
 
 module RDG
   module Control
-    class Rescue < Propagater
+    class Rescue < Analysis::Propagater
       register_analyser :rescue
 
       def prepare

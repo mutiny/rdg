@@ -1,7 +1,7 @@
 require_relative "analyser"
 
 module RDG
-  module Control
+  module Analysis
     class Propagater < Analyser
       def analyse
         add_internal_flow_edges

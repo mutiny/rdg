@@ -1,5 +1,5 @@
 module RDG
-  module Control
+  module Analysis
     class Equivalences
       def initialize
         @equivalences = {}

@@ -1,7 +1,7 @@
 require_relative "analyser"
 
 module RDG
-  module Control
+  module Analysis
     class Composite < Analyser
       def self.compose(*ts)
         Class.new(Composite) do

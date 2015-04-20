@@ -1,8 +1,8 @@
-require_relative "propagater"
+require "rdg/analysis/propagater"
 
 module RDG
   module Control
-    class RescueBody < Propagater
+    class RescueBody < Analysis::Propagater
       register_analyser :resbody
 
       def prepare

@@ -1,8 +1,8 @@
-require_relative "analyser"
+require "rdg/analysis/analyser"
 
 module RDG
   module Control
-    class Handler < Analyser
+    class Handler < Analysis::Analyser
       def analyse
         add_an_edge_from_every_main_node_to_the_handler
       end

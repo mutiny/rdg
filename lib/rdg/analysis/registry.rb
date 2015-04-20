@@ -1,5 +1,5 @@
 module RDG
-  module Control
+  module Analysis
     class Registry
       BY_TYPE = {}
 

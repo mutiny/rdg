@@ -5,7 +5,7 @@ module RDG
     describe Break do
       let(:graph) { spy("graph") }
       let(:equivalences) { spy("equivalences") }
-      let(:context) { Context.new(graph, equivalences) }
+      let(:context) { Analysis::Context.new(graph, equivalences) }
 
       let(:inside_ast) { FakeAst.new(:send, ancestors: [loop_ast]) }
       let(:outside_ast) { FakeAst.new(:send) }

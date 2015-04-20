@@ -1,7 +1,7 @@
-require "rdg/control/propagater"
+require "rdg/analysis/propagater"
 
 module RDG
-  module Control
+  module Analysis
     describe Propagater do
       let(:ast) { FakeAst.new(:some_type) }
       let(:graph) { spy("graph") }

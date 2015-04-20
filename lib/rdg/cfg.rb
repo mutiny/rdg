@@ -1,6 +1,7 @@
 require "require_all"
 
 require_relative "tree/ast"
+require_rel "analysis/*"
 require_rel "control/*"
 
 module RDG
@@ -14,7 +15,7 @@ module RDG
     end
 
     def initialize(ast)
-      @context = Control::Context.new
+      @context = Analysis::Context.new
       @context.graph.add_vertex(ast.root)
       analyse(ast)
     end

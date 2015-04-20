@@ -2,7 +2,7 @@ require_relative "context"
 require_relative "registry"
 
 module RDG
-  module Control
+  module Analysis
     class Analyser
       def self.register_analyser(*types)
         Registry.register_by_type(self, *types)

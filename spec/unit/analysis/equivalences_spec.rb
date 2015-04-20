@@ -1,7 +1,7 @@
-require "rdg/control/begin"
+require "rdg/analysis/equivalences"
 
 module RDG
-  module Control
+  module Analysis
     describe Equivalences do
       let(:ast) { FakeAst.new(:begin, children: [1, 2, 3]) }
 
