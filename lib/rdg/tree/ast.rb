@@ -1,5 +1,5 @@
 require "parser/current"
-require_relative "../rgl/bidirected_adjacency_graph"
+require_relative "../graph/bidirected_adjacency_graph"
 require_relative "rgl/pre_order_iterator"
 require_relative "rgl/post_order_iterator"
 
@@ -15,7 +15,7 @@ module RDG
       end
 
       def initialize(ast)
-        @graph = RDG::RGL::BidirectedAdjacencyGraph.new
+        @graph = Graph::BidirectedAdjacencyGraph.new
         import(ast)
       end
 

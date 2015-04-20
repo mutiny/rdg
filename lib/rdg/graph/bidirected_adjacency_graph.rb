@@ -1,11 +1,11 @@
 require "rgl/adjacency"
 require "rgl/dot"
-require_relative "allow_duplicates"
+require_relative "rgl/allow_duplicates"
 
 module RDG
-  module RGL
+  module Graph
     class BidirectedAdjacencyGraph < ::RGL::DirectedAdjacencyGraph
-      include AllowDuplicates
+      include RGL::AllowDuplicates
 
       def each_predecessor(vertex, &block)
         each_vertex.select { |v| each_adjacent(v).include?(vertex) }.each(&block)
