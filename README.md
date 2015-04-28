@@ -1,4 +1,6 @@
-# RDG [![Build Status](https://travis-ci.org/mutiny/rdg.png)](https://travis-ci.org/mutiny/rdg) [![Code Climate](https://codeclimate.com/github/mutiny/rdg.png)](https://codeclimate.com/github/mutiny/rdg) [![Dependency Status](https://gemnasium.com/mutiny/rdg.png)](https://gemnasium.com/mutiny/rdg) [![Test Coverage](https://codeclimate.com/github/mutiny/rdg/badges/coverage.svg)](https://codeclimate.com/github/mutiny/rdg)
+# RDG [![Build Status](https://travis-ci.org/mutiny/rdg.svg?branch=master)](https://travis-ci.org/mutiny/rdg) [![Code Climate](https://codeclimate.com/github/mutiny/rdg/badges/gpa.svg)](https://codeclimate.com/github/mutiny/rdg)
+[![Dependency Status](https://gemnasium.com/mutiny/rdg.svg)](https://gemnasium.com/mutiny/rdg)
+[![Test Coverage](https://codeclimate.com/github/mutiny/rdg/badges/coverage.svg)](https://codeclimate.com/github/mutiny/rdg)
 
 Dependency analysis for Ruby programs
 
