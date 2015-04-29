@@ -6,7 +6,7 @@ module RDG
       register_analyser :when
 
       def prepare
-        @test, @action = children
+        @test, @action = nodes
       end
 
       def internal_flow_edges

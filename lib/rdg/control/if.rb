@@ -6,7 +6,7 @@ module RDG
       register_analyser :if
 
       def prepare
-        @predicate, *@consequences = children.reject(&:empty?)
+        @predicate, *@consequences = nodes
       end
 
       def internal_flow_edges

@@ -10,11 +10,6 @@ module RDG
         @main, *@handlers, @alternative = children
       end
 
-      def analyse
-        super
-        @handlers.each { |h| registry.prepend_for(h, Handler) }
-      end
-
       def internal_flow_edges
         @alternative.empty? ? [] : [[@main, @alternative]]
       end
@@ -25,6 +20,10 @@ module RDG
 
       def end_nodes
         @alternative.empty? ? nodes : @handlers.push(@alternative)
+      end
+
+      def add_extra_analysers
+        @handlers.each { |h| registry.prepend_for(h, Handler) }
       end
     end
   end

@@ -40,7 +40,7 @@ module RDG
 
     def analyse(ast)
       ast.pre_order_iterator.select(&:compound?).each do |ast_node|
-        @context.registry.analyser_for(ast_node, @context).analyse
+        @context.registry.analyser_for(ast_node).analyse(@context)
       end
     end
   end

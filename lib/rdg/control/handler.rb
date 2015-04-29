@@ -3,7 +3,8 @@ require "rdg/analysis/analyser"
 module RDG
   module Control
     class Handler < Analysis::Analyser
-      def analyse
+      def analyse(context)
+        super
         add_an_edge_from_every_main_node_to_the_handler
       end
 

@@ -5,11 +5,13 @@ module RDG
     describe When do
       let(:ast) { FakeAst.new(:when, children: [:test, :action]) }
       let(:graph) { spy("graph") }
-      subject { When.new(ast, graph) }
+      let(:context) { Analysis::Context.new(graph) }
+      subject { When.new(ast) }
 
       context "two successors" do
         before(:each) do
           allow(graph).to receive(:each_successor).with(ast) { [:next_when, :successor] }
+          subject.analyse(context)
         end
 
         it "should have control flow start at the expression" do
@@ -21,12 +23,10 @@ module RDG
         end
 
         it "should propagate outgoing flow from test to next when" do
-          subject.propogate_outgoing_flow
           expect(graph).to have_received(:add_edge).with(:test, :next_when)
         end
 
         it "should propagate outgoing flow from action to successor" do
-          subject.propogate_outgoing_flow
           expect(graph).to have_received(:add_edge).with(:action, :successor)
         end
       end
@@ -34,6 +34,7 @@ module RDG
       context "one successor" do
         before(:each) do
           allow(graph).to receive(:each_successor).with(ast) { [:successor] }
+          subject.analyse(context)
         end
 
         it "should have control flow start at the expression" do
@@ -45,12 +46,10 @@ module RDG
         end
 
         it "should propagate outgoing flow from test to successor" do
-          subject.propogate_outgoing_flow
           expect(graph).to have_received(:add_edge).with(:test, :successor)
         end
 
         it "should propagate outgoing flow from action to successor" do
-          subject.propogate_outgoing_flow
           expect(graph).to have_received(:add_edge).with(:action, :successor)
         end
       end

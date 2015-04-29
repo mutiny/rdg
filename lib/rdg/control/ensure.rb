@@ -9,11 +9,6 @@ module RDG
         @body, @finaliser = nodes
       end
 
-      def analyse
-        super
-        registry.prepend_for(@finaliser, Handler)
-      end
-
       def internal_flow_edges
         [[@body, @finaliser]]
       end
@@ -24,6 +19,10 @@ module RDG
 
       def end_nodes
         [@finaliser]
+      end
+
+      def add_extra_analysers
+        registry.prepend_for(@finaliser, Handler)
       end
     end
   end

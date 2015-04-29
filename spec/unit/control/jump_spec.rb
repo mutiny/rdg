@@ -4,6 +4,7 @@ module RDG
   module Control
     describe Jump do
       let(:graph) { spy("graph") }
+      let(:context) { Analysis::Context.new(graph) }
       let(:block_ast) { FakeAst.new(:while) }
       let(:ast) { FakeAst.new(:thing, ancestors: [block_ast]) }
 
@@ -14,18 +15,18 @@ module RDG
           end
         end
 
-        DummyJump.new(ast, graph)
+        DummyJump.new(ast)
       end
 
       it "should remove any edges to existing successors" do
         allow(graph).to receive(:each_successor).and_yield(:successor)
-        subject.analyse
+        subject.analyse(context)
 
         expect(graph).to have_received(:remove_edge).with(ast, :successor)
       end
 
       it "should add an edge from jump to each new successor" do
-        subject.analyse
+        subject.analyse(context)
 
         expect(graph).to have_received(:add_edge).with(ast, :first_new_successor)
         expect(graph).to have_received(:add_edge).with(ast, :second_new_successor)
@@ -33,7 +34,7 @@ module RDG
 
       it "should do nothing when not contained within a block" do
         ast.ancestors = []
-        subject.analyse
+        subject.analyse(context)
 
         expect(graph).not_to have_received(:add_edge)
         expect(graph).not_to have_received(:remove_edge)
