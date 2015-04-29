@@ -67,7 +67,7 @@ module RDG
         end
 
         def ascend(node)
-          last_child = graph.each_adjacent(node).select { |c| visited?(c) }.last
+          last_child = graph.each_adjacent(node).to_a.reverse.detect { |c| visited?(c) }
 
           if visited?(node)
             node
