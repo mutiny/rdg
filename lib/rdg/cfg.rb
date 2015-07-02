@@ -31,6 +31,7 @@ module RDG
     def vertices
       @context.graph.each_vertex.to_a
     end
+    alias_method :nodes, :vertices
 
     def successors(v)
       @context.graph.each_adjacent(v).to_a
