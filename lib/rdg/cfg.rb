@@ -14,6 +14,10 @@ module RDG
       new(Tree::AST.from_source(source))
     end
 
+    def self.from_ast(ast)
+      new(Tree::AST.new(ast))
+    end
+
     def initialize(ast)
       @context = Analysis::Context.new
       @context.graph.add_vertex(ast.root)
